@@ -2,10 +2,28 @@
     <div class="booth">
         <div v-for="(ballot, index) in this.$store.state.ballots" :key="index">
             <div v-if="ballot.ballot.name==boothName" >
-                {{ballot.ballot.name}}
+                <h1>{{ballot.ballot.name}}</h1>
+                <p>{{ballot.ballot.description}} 
+                    </p><p>
+                    by {{ballot.ballot.organization}}</p>
+                <v-row>
+                    <v-col>
+                        <v-row v-for="(b, i) in ballot.subBallot" :key="i">
+                           <v-btn style="margin: 10px" @click="select(i)">
+                               {{b.value[0]}}
+                               </v-btn> 
+                        </v-row>
+                    </v-col>
+                    <v-col>
+                        <h2>{{ballot.subBallot[selectedBallot].value[0]}}</h2>
+                        <v-row v-for="(c, i) in ballot.subBallot[selectedBallot].value" :key="i">
+                            <v-radio v-if="i>0" :label="c.value" value="c.value">
+                                </v-radio>
+                        </v-row>
+                    </v-col>
+                </v-row>
             </div>
         </div>
-        
     </div>
 </template>
 
@@ -17,11 +35,16 @@ export default {
     },
     data() {
         return{
-            boothName: this.$route.params.id
+            boothName: this.$route.params.id,
+            selectedBallot: 0
         }
     },
     computed: {
-        
+    },
+    methods: {
+        select(index){
+            this.selectedBallot = index
+        }
     }
 }
 </script>
@@ -29,5 +52,7 @@ export default {
 <style lang="css">
     .booth{
         margin: 100px 50px 50px 50px;
+        padding: 50px;
+        background-color: white;
     }
 </style>

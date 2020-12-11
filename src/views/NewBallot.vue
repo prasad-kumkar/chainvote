@@ -18,7 +18,7 @@
                     prepend-icon="mdi-camera"
                     style="width: 150px"
                   ></v-file-input>
-                  <v-img style="border-radius: 100%; height: 200px; width: 200px" :src="url"></v-img>
+                  <v-img style=" height: 150px; width: 150px" :src="url"></v-img>
                 </div>
               </div>
               
@@ -212,7 +212,7 @@
                           <v-avatar left>
                             <v-icon>mdi-account-circle</v-icon>
                           </v-avatar>
-                          <input type="text" v-model="candidate[index]" style="color: white">
+                          <input type="text" v-model="candidate.value" style="color: white">
                         </v-chip>
                      </div>
                      
@@ -253,7 +253,7 @@ export default {
   data: () => {
     return {
       page: 0,
-      url: 'https://st2.depositphotos.com/1010652/5980/v/600/depositphotos_59808999-stock-illustration-election-day-cartoon-symbol.jpg',
+      url: '',
       image: null,
       auth,
       ballot: {
@@ -314,7 +314,7 @@ export default {
   },
   addCandidates(){
     
-      this.subballots[this.selectedSubBallot].value.push({})
+      this.subballots[this.selectedSubBallot].value.push({value: ''})
     
   }
 }

@@ -11,9 +11,12 @@ fb.ballotsCollection.orderBy('createdOn').onSnapshot(snapshot => {
   snapshot.forEach(doc => {
     let ballot = doc.data()
     ballot.id = doc.id
-
     ballotsArray.push(ballot)
   })
+
+  // for(var i=0; i<ballotsArray.length; i++){
+
+  // }
 
   store.commit('setBallots', ballotsArray)
 })
@@ -72,7 +75,7 @@ const store = new Vuex.Store({
         router.push('/login')
       },
     async createBallot({state}, ballot) {
-      console.log(ballot)
+
       await fb.ballotsCollection.doc(ballot[0].name).set({
         createdOn: new Date(),
         ballot: ballot[0],
@@ -80,6 +83,17 @@ const store = new Vuex.Store({
         userId: fb.auth.currentUser.uid,
         userName: state.userProfile.name,
       })
+
+      for(var i=0; i<ballot[1].length; i++){
+        var name = ballot[1][i].value[0]
+        var subBallotCollection = fb.ballotsCollection.doc(ballot[0].name).collection(name)
+
+        for (var j=1; j<ballot[1][i].value.length; j++){
+          await subBallotCollection.doc(ballot[1][i].value[j].value).set({
+            createdOn: new Date()
+          })
+        }
+      }
     }
   }
 })
