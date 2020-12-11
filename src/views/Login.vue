@@ -84,12 +84,12 @@
             :rules="{
             required: true,
             digits: 10,
-            regex: '^(71|72|74|75|76|77|78|79|80|81|82|84|85|86|87|88|89)\\d{7}$'
+            regex: '^(71|72|74|75|76|77|78|79|80|81|82|84|85|86|87|88|89)\\d{8}$'
             }"
         >
             <v-text-field
             v-model.trim="signupForm.phone"
-            :counter="9"
+            :counter="10"
             :error-messages="errors"
             label="Phone Number"
             required
