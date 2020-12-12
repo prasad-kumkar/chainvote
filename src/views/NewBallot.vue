@@ -1,4 +1,5 @@
 <template>
+<div id="new-ballot">
   <div id="dashboard">
     <h1  style="text-align: center; padding-bottom: 20px">New Election</h1>
     <section>
@@ -243,6 +244,7 @@
       
     </section>
   </div>
+  </div>
 </template>
 
 
@@ -322,8 +324,13 @@ export default {
 </script>
 
 <style lang="css">
+#new-ballot{
+  display: flex;
+  justify-content: center;
+}
     #dashboard{
-        margin: 15% 5% 5% 5%;
+        margin-top: 100px;
+        max-width: 1500px;
         padding: 60px;
         padding-top: 5%;
         background-color: #E0F2F1;

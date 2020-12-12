@@ -248,18 +248,16 @@
 
 <style lang="sass">
 
-.register 
-    width: 100%
-    margin: 20% 10% 10% 10%
-    padding: 50px 50px 20px 50px
-    background-color: white
+#login 
+    display: flex
+    justify-content: center
+    align-items: center
 .buttons
     display: flex
     flex-wrap: wrap
     justify-content: center
 .register-form, .login-form
-    width:50%
-    min-width: 200px
-    margin: 20% 25% 0% 25%
-    padding: 5%
+    max-width: 500px
+    margin-top: 100px
+    padding: 50px
 </style>
