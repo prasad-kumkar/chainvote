@@ -16,10 +16,16 @@
                     </v-col>
                     <v-col>
                         <h2>{{ballot.subBallot[selectedBallot].value[0]}}</h2>
-                        <v-row v-for="(c, i) in ballot.subBallot[selectedBallot].value" :key="i">
-                            <v-radio v-if="i>0" :label="c.value" value="c.value">
+                        <div>
+                            <v-radio-group >
+                            <div v-for="(c, i) in ballot.subBallot[selectedBallot].value" :key="i">
+                                <v-radio v-if="i>0" :label="c.value" :value="c.value">
                                 </v-radio>
-                        </v-row>
+                            </div>
+                            
+                        </v-radio-group>
+                        </div>
+                        
                     </v-col>
                 </v-row>
             </div>

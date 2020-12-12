@@ -257,7 +257,7 @@ export default {
       image: null,
       auth,
       ballot: {
-          name: 'Election#',
+          name: '',
           startDate: '',
           endDate:'',
           startTime: '',
