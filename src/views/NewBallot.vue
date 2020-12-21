@@ -228,16 +228,19 @@
 
               <!-- END -->
               <div class="buttons">
-                <v-btn  style="margin-right:20px" v-if="this.page!=0" @click="previousPage()">Back</v-btn>
-                <v-btn v-if="this.page!=5" @click="nextPage()">Next</v-btn>
+                <v-btn v-if="this.page!=0" @click="previousPage()" class="btn">Back</v-btn>
+                <v-btn v-if="this.page!=5" @click="nextPage()" class="btn">Next</v-btn>
                 <v-btn 
                   @click="createBallot()" 
                   v-if="this.page==5"
-                  :disabled="ballot.content === ''" 
-                  class="button">
+                  :disabled="ballot.name === ''" 
+                  class="btn"
+                  >
                   create
                 </v-btn>
-                
+                <v-btn to="/" class="btn">
+                  Go Home
+                </v-btn>
               </div>
               
 
@@ -254,7 +257,7 @@ import {auth} from '../firebase'
 export default {
   data: () => {
     return {
-      page: 0,
+      page: 5,
       url: '',
       image: null,
       auth,
@@ -279,7 +282,8 @@ export default {
   },
   methods: {
     createBallot() {
-      this.$store.dispatch('createBallot', [this.ballot, this.subballots])
+      setTimeout(this.$store.dispatch('createBallot', [this.ballot, this.subballots]), 1000)
+      
     },
     nextPage(){
       this.page++
@@ -347,9 +351,12 @@ export default {
     }
     .buttons{
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       padding-top: 20px;
       padding-right: 50px;
+    }
+    .btn{
+      margin: 10px;
     }
     #details{
       padding-top: 50px;
