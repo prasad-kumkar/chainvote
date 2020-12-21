@@ -24,7 +24,6 @@
                             </div>
                         </v-radio-group>
                         </div>
-                        <p>{{ballot.subBallot[selectedBallot].value}}</p>
                         <v-btn>Vote</v-btn>
                     </v-col>
                 </v-row>
