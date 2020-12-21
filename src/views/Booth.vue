@@ -22,10 +22,10 @@
                                 <v-radio v-if="i>0" :label="c.value" :value="c.value">
                                 </v-radio>
                             </div>
-                            
                         </v-radio-group>
                         </div>
-                        
+                        <p>{{ballot.subBallot[selectedBallot].value}}</p>
+                        <v-btn>Vote</v-btn>
                     </v-col>
                 </v-row>
             </div>
