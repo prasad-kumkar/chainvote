@@ -238,7 +238,7 @@
                   >
                   create
                 </v-btn>
-                <v-btn to="/" class="btn">
+                <v-btn to="/" v-if="this.page==5" class="btn">
                   Go Home
                 </v-btn>
               </div>
@@ -356,7 +356,6 @@ export default {
       padding-right: 50px;
     }
     .btn{
-      margin: 10px;
     }
     #details{
       padding-top: 50px;
