@@ -257,7 +257,7 @@ import {auth} from '../firebase'
 export default {
   data: () => {
     return {
-      page: 5,
+      page: 0,
       url: '',
       image: null,
       auth,
