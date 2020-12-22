@@ -17,13 +17,14 @@
                     <v-col>
                         <h2>{{ballot.subBallot[selectedBallot].value[0]}}</h2>
                         <div>
-                            <v-radio-group >
-                            <div v-for="(c, i) in ballot.subBallot[selectedBallot].value" :key="i">
-                                <v-radio v-if="i>0" :label="c.value" :value="c.value">
+                            <v-radio-group v-model="choice[1][selectedBallot]">
+                            <div v-for="(c, i) in ballot.subBallot[selectedBallot].value" :key="i" >
+                                <v-radio v-if="i>0" :label="c.value" :value="c.value" >
                                 </v-radio>
                             </div>
                         </v-radio-group>
                         </div>
+                        <p>Voting for {{choice[0]}}. Selected Candidates: {{choice[1] || null}}</p>
                         <v-btn>Vote</v-btn>
                     </v-col>
                 </v-row>
@@ -41,7 +42,8 @@ export default {
     data() {
         return{
             boothName: this.$route.params.id,
-            selectedBallot: 0
+            selectedBallot: 0,
+            choice: [this.$route.params.id, []]
         }
     },
     computed: {
