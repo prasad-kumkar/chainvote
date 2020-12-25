@@ -3,9 +3,6 @@
   <div id="dashboard">
     <h1  style="text-align: center; padding-bottom: 20px">New Election</h1>
     <section>
-      
-      {{this.ballot}}
-      {{this.subballots}}
             <!-- PAGE 1 -->
               <div v-if="this.page==0" id="details">
                 <div class="text-fields">
@@ -69,7 +66,6 @@
                   <v-text-field filled v-model="admin.value" label="Email"></v-text-field>
                   <v-btn v-if="index>=1" style="margin: 10px" @click="removeAdmin(index)" small color="red"><v-icon color="white">mdi-minus</v-icon></v-btn>
                 </div>
-
                 <v-btn style="margin: 20px 20px 20px 0px" @click="addAdmin()">Add more admins</v-btn>
               </div>
 
@@ -79,9 +75,7 @@
                 <div v-for="(voter, index) in this.ballot.voters" :key="index" class="voter-fields">
                   <v-text-field filled v-model="voter.value" label="Email"></v-text-field>
                   <v-btn style="margin: 10px" @click="removeVoter(index)" small color="red"><v-icon color="white">mdi-minus</v-icon></v-btn>
-                  
                 </div>
-                {{this.ballot.voters}}
                 <v-btn style="margin: 20px 20px 20px 0px" @click="addVoter()">Add more voters</v-btn>
               </div>
               

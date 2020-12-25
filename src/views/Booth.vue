@@ -3,7 +3,6 @@
         <div v-for="(ballot, index) in this.$store.state.ballots" :key="index">
             <div v-if="ballot.ballot.name==boothName" >
                 <p hidden>{{sb = ballot.subBallot}} </p>
-                {{ballot}}
                 <h1>{{ballot.ballot.name}}</h1>
                 <p>{{ballot.ballot.description}} 
                     </p><p>
@@ -29,7 +28,7 @@
                         <p>Voting for {{choice[0]}}. Selected Candidates: {{choice[1] || null}}</p>
                         <v-text-field label="Voter ID" v-model.trim="voterId"></v-text-field>
                         <v-btn @click="castVote()" v-bind:disabled="hasVoted">Vote</v-btn>
-                        {{response.data.error || "Voted Successfully"}}
+                        {{response.data.error}}
                     </v-col>
                 </v-row>
             </div>
@@ -72,7 +71,7 @@ export default {
                         "electionId": this.sb[i].id,
                         "picked": this.choice[1][i]
                     }).then( response => {
-                    this.response = response
+                    this.response.data.error = "Voted Successfully"
                     console.log(response)
                     }).catch( error => {
                     this.response = error
