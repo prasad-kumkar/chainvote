@@ -28,7 +28,7 @@
                         <p>Voting for {{choice[0]}}. Selected Candidates: {{choice[1] || null}}</p>
                         <v-text-field label="Voter ID" v-model.trim="voterId"></v-text-field>
                         <v-btn @click="castVote()" v-bind:disabled="hasVoted">Vote</v-btn>
-                        {{response.data.error}}
+                        {{response}}
                     </v-col>
                 </v-row>
             </div>
@@ -52,7 +52,7 @@ export default {
             displayChoice: [],
             voterId: "",
             sb: null,
-            response: {data: {error: ""}},
+            response: null,
             hasVoted: false
         }
     },
@@ -71,7 +71,7 @@ export default {
                         "electionId": this.sb[i].id,
                         "picked": this.choice[1][i]
                     }).then( response => {
-                    this.response.data.error = "Voted Successfully"
+                    this.response = response
                     console.log(response)
                     }).catch( error => {
                     this.response = error
