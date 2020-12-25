@@ -2,7 +2,7 @@
     <div>
         <v-app-bar
             absolute
-            color="teal lighten-3"
+            color="teal lighten-2"
             dark>
         <a href="/" style="color: white; font-size: 15px; margin-left:30px; text-decoration: none;"><h1>WYVote</h1></a>
         <v-spacer></v-spacer>

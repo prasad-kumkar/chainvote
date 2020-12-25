@@ -3,6 +3,9 @@
   <div id="dashboard">
     <h1  style="text-align: center; padding-bottom: 20px">New Election</h1>
     <section>
+      
+      {{this.ballot}}
+      {{this.subballots}}
             <!-- PAGE 1 -->
               <div v-if="this.page==0" id="details">
                 <div class="text-fields">
@@ -66,6 +69,7 @@
                   <v-text-field filled v-model="admin.value" label="Email"></v-text-field>
                   <v-btn v-if="index>=1" style="margin: 10px" @click="removeAdmin(index)" small color="red"><v-icon color="white">mdi-minus</v-icon></v-btn>
                 </div>
+
                 <v-btn style="margin: 20px 20px 20px 0px" @click="addAdmin()">Add more admins</v-btn>
               </div>
 
@@ -75,7 +79,9 @@
                 <div v-for="(voter, index) in this.ballot.voters" :key="index" class="voter-fields">
                   <v-text-field filled v-model="voter.value" label="Email"></v-text-field>
                   <v-btn style="margin: 10px" @click="removeVoter(index)" small color="red"><v-icon color="white">mdi-minus</v-icon></v-btn>
+                  
                 </div>
+                {{this.ballot.voters}}
                 <v-btn style="margin: 20px 20px 20px 0px" @click="addVoter()">Add more voters</v-btn>
               </div>
               
@@ -158,6 +164,7 @@
                       </v-list-item-title>
                       <v-list-item-subtitle v-for="(voter, index) in ballot.voters" :key="index">
                         {{voter.value}}
+                        {{voter.id}}
                       </v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
@@ -238,6 +245,7 @@
                   >
                   create
                 </v-btn>
+                {{response}}
                 <v-btn to="/" v-if="this.page==5" class="btn">
                   Go Home
                 </v-btn>
@@ -253,6 +261,7 @@
 
 <script>
 import {auth} from '../firebase'
+const axios = require('axios')
 
 export default {
   data: () => {
@@ -262,6 +271,7 @@ export default {
       image: null,
       auth,
       ballot: {
+          id: "E"+Math.random().toString(36).substr(2, 5).toUpperCase(),
           name: '',
           startDate: '',
           endDate:'',
@@ -273,6 +283,7 @@ export default {
           voters: [],
       },
       subballots: [],
+      response: '',
       newSubBallotCount: 0, 
       selectedSubBallot: 0
     }
@@ -282,8 +293,43 @@ export default {
   },
   methods: {
     createBallot() {
-      setTimeout(this.$store.dispatch('createBallot', [this.ballot, this.subballots]), 1000)
-      
+      this.$store.dispatch('createBallot', [this.ballot, this.subballots]), 1000
+      for (var j=0; j<this.subballots.length; j++){
+        var candidates = {}
+        for(var i=1; i<this.subballots[j].value.length; i++){
+          candidates[this.subballots[j].value[i].id]=this.subballots[j].value[i].value
+        }
+        axios.post('http://52.117.138.56:30652/registerElection', {
+          "args": {
+            "electionId": this.subballots[j].id,
+            "electionName": this.ballot.name+" "+this.subballots[j].value[0],
+            "electionDescription": this.ballot.description,
+            "start": this.ballot.startDate,
+            "end": this.ballot.endDate
+          },
+          "candidates": candidates
+        }).then( response => {
+          this.response = response
+          console.log(response)
+        }).catch( error => {
+          this.response = error
+          console.log(error)
+        })
+      }
+      for(i=0; i<this.ballot.voters.length; i++){
+        axios.post('http://52.117.138.56:30652/registerVoter', {
+          "voterId": this.ballot.voters[i].id,
+          "electionId": this.ballot.id,
+          "firstName": this.ballot.voters[i].value,
+          "lastName": this.ballot.voters[i].value
+        }).then( response => {
+          this.response = response
+          console.log(response)
+        }).catch( error => {
+          this.response = error
+          console.log(error)
+        })
+      }
     },
     nextPage(){
       this.page++
@@ -303,14 +349,14 @@ export default {
       }
     },
     addVoter() {
-      this.ballot.voters.push({value: ''})
+      this.ballot.voters.push({value: '', id: "V"+this.ballot.id.substring(1)+Math.random().toString(36).substr(2, 7).toUpperCase()})
     },
     removeVoter(index){
       this.ballot.voters.splice(index,1)
   },
   newSubBallot(){
     this.newSubBallotCount++
-    this.subballots.push({value: [`Ballot ${this.newSubBallotCount}`]})
+    this.subballots.push({value: [`Ballot ${this.newSubBallotCount}`], id: "E"+this.ballot.id.substring(1)+Math.random().toString(36).substr(2, 7).toUpperCase()})
   },
   removeSubBallot(index){
     this.subballots.splice(index,1)
@@ -319,9 +365,15 @@ export default {
     this.selectedSubBallot = index
   },
   addCandidates(){
-    
-      this.subballots[this.selectedSubBallot].value.push({value: ''})
-    
+      this.subballots[this.selectedSubBallot].value.push({value: '', id: "C"+this.ballot.id.substring(1)+Math.random().toString(36).substr(2, 7).toUpperCase()})
+  },
+  serverStatus(){
+    axios.get('http://52.117.138.56:30652/serverStatus').then( (response) => {
+      console.log(response)
+      return response
+    }).catch( error => {
+      return error
+    })
   }
 }
 }
