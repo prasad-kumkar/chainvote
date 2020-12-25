@@ -299,7 +299,7 @@ export default {
         for(var i=1; i<this.subballots[j].value.length; i++){
           candidates[this.subballots[j].value[i].id]=this.subballots[j].value[i].value
         }
-        axios.post('http://52.117.138.56:30652/registerElection', {
+        axios.post('https://ws0.herokuapp.com/registerElection', {
           "args": {
             "electionId": this.subballots[j].id,
             "electionName": this.ballot.name+" "+this.subballots[j].value[0],
@@ -317,7 +317,7 @@ export default {
         })
       }
       for(i=0; i<this.ballot.voters.length; i++){
-        axios.post('http://52.117.138.56:30652/registerVoter', {
+        axios.post('https://ws0.herokuapp.com/registerVoter', {
           "voterId": this.ballot.voters[i].id,
           "electionId": this.ballot.id,
           "firstName": this.ballot.voters[i].value,

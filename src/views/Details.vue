@@ -60,14 +60,14 @@ export default {
         },
         getResult(arr){
             for(var i=0; i<arr.length; i++){
-                axios.post('http://52.117.138.56:30652/queryByKey', {
+                axios.post('https://ws0.herokuapp.com/queryByKey', {
                         "key": arr[i].id
                     }).then( response => {
-                    this.result.push(response.data)
-                    console.log(response)
+                        this.result.push(response.data)
+                        console.log(response)
                     }).catch( error => {
-                    this.response = error
-                    console.log(error)
+                        this.response = error
+                        console.log(error)
                 })
             }
         }

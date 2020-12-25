@@ -21,7 +21,7 @@
                         <div>
                             <v-radio-group v-model="choice[1][selectedBallot]">
                             <div v-for="(c, i) in ballot.subBallot[selectedBallot].value" :key="i" >
-                                <v-radio v-if="i>0" :label="c.value" :value="c.value">
+                                <v-radio v-if="i>0" :label="c.value" :value="c.id">
                                 </v-radio>
                             </div>
                         </v-radio-group>
@@ -29,7 +29,7 @@
                         <p>Voting for {{choice[0]}}. Selected Candidates: {{choice[1] || null}}</p>
                         <v-text-field label="Voter ID" v-model.trim="voterId"></v-text-field>
                         <v-btn @click="castVote()" v-bind:disabled="hasVoted">Vote</v-btn>
-                        {{response.data.error || response.data.response}}
+                        {{response.data.error || "Voted Successfully"}}
                     </v-col>
                 </v-row>
             </div>
@@ -67,7 +67,7 @@ export default {
         castVote(){
             for(var i=0; i<this.choice[1].length; i++){
 
-                axios.post('http://52.117.138.56:30652/castBallot', {
+                axios.post('https://ws0.herokuapp.com/castBallot', {
                         "voterId": this.voterId,
                         "electionId": this.sb[i].id,
                         "picked": this.choice[1][i]
