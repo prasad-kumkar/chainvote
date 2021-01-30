@@ -1,20 +1,25 @@
 <template>
     <div>
         <v-app-bar
-            absolute
-            color="teal lighten-2"
-            dark>
-        <a href="/" style="color: white; font-size: 15px; margin-left:30px; text-decoration: none;"><h1>WYVote</h1></a>
-        <v-spacer></v-spacer>
-        <v-btn v-if="auth.currentUser==null" icon to="/login"><v-icon>mdi-login</v-icon></v-btn>
-        <v-btn icon to="/"><v-icon>mdi-home</v-icon></v-btn>
-        <v-btn v-if="auth.currentUser!=null" icon to="/settings"><v-icon>mdi-looks</v-icon></v-btn>
-        <v-btn v-if="auth.currentUser!=null" style="background-color: teal"><v-icon>mdi-account</v-icon>{{userData.userProfile.name}}</v-btn>
-        <v-btn v-if="auth.currentUser!=null" icon @click="logout()"><v-icon>mdi-logout</v-icon></v-btn>
-        </v-app-bar>
-      <router-view></router-view>
+      flat
+      elevate-on-scroll
+    >
+      <p>CHAINVOTE</p>
+      <v-spacer></v-spacer>
+      <v-btn icon to="/"><v-icon>mdi-home</v-icon></v-btn>
+      <v-btn text to="/app">App</v-btn>
+      <v-btn text to="/docs">Docs</v-btn>
+      <v-btn text to="/contact">Contact</v-btn>
+      <v-btn v-if="auth.currentUser!=null" to="/settings"><v-icon>mdi-account</v-icon>{{userData.userProfile.name}}</v-btn>
+      <v-btn v-else text to="/login">Log in</v-btn>
+      <v-btn v-if="auth.currentUser!=null" icon @click="logout()"><v-icon>mdi-logout</v-icon></v-btn>
+      <v-btn icon href="https://github.com/bchainify/chainvote"><v-icon>mdi-github</v-icon></v-btn>
+    </v-app-bar>
     </div>
 </template>
+
+
+
 
 <script>
 import { auth } from '../firebase'
@@ -37,3 +42,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+    *{
+        font-family: 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+   p{
+        
+        font-size: 30px;
+        letter-spacing: 5px;
+        height: 50%;
+        margin-left: 4vw;
+    } 
+</style>

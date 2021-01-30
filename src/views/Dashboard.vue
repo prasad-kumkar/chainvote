@@ -1,12 +1,19 @@
 <template>
   <div class="home">
-    <div class="dash-header">
+    <div class="poster">
+      <h1>Vote for change</h1>
+      <h1>Vote for a better future</h1>
+      <p>With the most secure voting platform</p>
+    </div>
+    <div class="heading">
       <h1>Active Elections</h1>
       <v-spacer></v-spacer>
-    <v-btn color="primary" to="/new">Create a new Election</v-btn></div>
+      <v-btn color="white" to="/new">Start a new Election</v-btn>
+    </div>
+    <div class="cards">
     <v-row no-gutters>
     <v-col v-for="(ballot, index) in userData.ballots" :key="index" id="cards">
-      <v-card color="teal lighten-5" max-width="350px" style="margin: 20px">
+      <v-card max-width="350px" style="margin: 20px">
         <v-card-title>
           {{ballot.ballot.name}}
           <v-card-subtitle>{{"by " + ballot.ballot.organization}}</v-card-subtitle>
@@ -41,6 +48,7 @@
       </v-card>
     </v-col>
     </v-row>
+    </div>
   </div>
 </template>
 
@@ -68,14 +76,30 @@ export default {
 </script>
 
 
-<style lang="css">
+<style lang="css" scoped>
   .home{
-    margin: 100px 5% 5% 5%;
     padding: 20px;
-    background-color: white;
+    background-image: linear-gradient(rgb(245, 245, 245), rgb(252, 130, 130),rgb(118, 118, 248));
+    height: 100%;
   }
   .dash-header{
     display: flex;
     padding: 3% 5% 3% 3%;
+  }
+  .poster{
+    padding:5vw;
+  }
+  .poster h1{
+    font-size: 50px;
+  }
+  .poster p{
+    font-size: 30px;
+  }
+  .heading{
+    display: flex;
+    padding: 2vw 5vw;
+  }
+  .cards{
+    margin: 3vw 5vw;
   }
 </style>

@@ -246,7 +246,7 @@
   }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 
 #login 
     display: flex

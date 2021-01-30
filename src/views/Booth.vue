@@ -28,7 +28,13 @@
                         <p>Voting for {{choice[0]}}. Selected Candidates: {{choice[1] || null}}</p>
                         <v-text-field label="Voter ID" v-model.trim="voterId"></v-text-field>
                         <v-btn @click="castVote()" v-bind:disabled="hasVoted">Vote</v-btn>
-                        {{response}}
+                        <div v-if="response.data.error != ''">
+                            <p>{{response.data.error}}</p>
+                        </div>
+                        <div v-else>
+                            <p>Voted Successfully!</p>
+                        </div>
+                        
                     </v-col>
                 </v-row>
             </div>
@@ -52,7 +58,7 @@ export default {
             displayChoice: [],
             voterId: "",
             sb: null,
-            response: null,
+            response: {"date": {"error": ""}},
             hasVoted: false
         }
     },
@@ -84,9 +90,8 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
     .booth{
-        margin: 100px 50px 50px 50px;
         padding: 50px;
         background-color: white;
     }

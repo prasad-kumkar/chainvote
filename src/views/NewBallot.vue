@@ -373,17 +373,20 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 #new-ballot{
   display: flex;
   justify-content: center;
+  background-color: #E0F2F1;
+  height: 100%;
+  align-items: center;
+  padding: 100px;
 }
     #dashboard{
-        margin-top: 100px;
+        
         max-width: 1500px;
-        padding: 60px;
-        padding-top: 5%;
-        background-color: #E0F2F1;
+
+        
     }
 
     #details{

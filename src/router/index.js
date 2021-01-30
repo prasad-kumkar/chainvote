@@ -7,9 +7,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Dashboard',
+    path: '/app',
+    name: 'App',
     component: Dashboard
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: () => import(/* webpackChunkName: "settings" */ '../views/Home.vue'),
   },
   {
     path: '/settings',

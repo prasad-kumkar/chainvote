@@ -75,7 +75,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
     .booth{
         margin: 100px 50px 50px 50px;
         padding: 50px;

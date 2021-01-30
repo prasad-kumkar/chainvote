@@ -1,24 +1,25 @@
 <template>
-  <v-app style="background-color: rgb(196, 196, 196); margin:">
+  <v-app>
     <Header/>
     <v-main>
-      
+      <router-view></router-view>
     </v-main>
+    <Footer/>
   </v-app>
 </template>
 
 <script>
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 export default {
   name: 'App',
 
   components: {
-    Header
+    Header,
+    Footer
   },
 
   
 };
 </script>
-<style scoped>
-</style>
