@@ -10,7 +10,7 @@
         <p>{{electionCount}}+ Elections conducted</p>
         <p>{{identityCount}}+ Decentralized Identities stored</p>
         <p>Trusted by {{companiesCount}}+ companies. </p>
-        <v-btn class="try">Try it out</v-btn> <br/>
+        <v-btn class="try" to="/app">Try it out</v-btn> <br/>
         <!--v-btn class="try" text> Pricing</v-btn-->
     </div>
     
