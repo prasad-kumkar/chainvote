@@ -13,7 +13,7 @@
     <div class="cards">
     <v-row no-gutters>
     <v-col v-for="(ballot, index) in userData.ballots" :key="index" id="cards">
-      <v-card max-width="350px" style="margin: 20px">
+      <v-card min-width="300px" max-width="25%" style="margin: 50px 0px;">
         <v-card-title>
           {{ballot.ballot.name}}
           <v-card-subtitle>{{"by " + ballot.ballot.organization}}</v-card-subtitle>
@@ -82,10 +82,6 @@ export default {
     background-image: linear-gradient(rgb(245, 245, 245), rgb(252, 130, 130),rgb(118, 118, 248));
     height: 100%;
   }
-  .dash-header{
-    display: flex;
-    padding: 3% 5% 3% 3%;
-  }
   .poster{
     padding:5vw;
   }
@@ -99,7 +95,9 @@ export default {
     display: flex;
     padding: 2vw 5vw;
   }
-  .cards{
-    margin: 3vw 5vw;
+  #cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
 </style>
