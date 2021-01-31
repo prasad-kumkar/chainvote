@@ -9,7 +9,7 @@
       <v-spacer></v-spacer>
         <div class="logo">
             <p>contact@bchainify.org</p>
-      <p>+1xxxxxxx</p>
+      <p>+1 (307) 757-3544</p>
         </div>
         <div class="icons">
             <div class="icon"><v-btn icon><v-icon>mdi-github</v-icon></v-btn></div>
