@@ -41,6 +41,9 @@
             ></v-text-field>
         </validation-provider>
         
+        <div class="error-message">
+            <p>{{errorMessage}}</p>
+        </div>
         <div class="buttons">
             <v-btn
                 class="mr-4"
@@ -218,6 +221,7 @@
         showLoginForm: true,
         showPasswordReset: false,
         checkbox: null,
+        errorMessage: ""
     }),
 
     methods: {
@@ -227,12 +231,16 @@
         togglePasswordReset() {
             this.showPasswordReset = !this.showPasswordReset
         },
-        login() {
-            console.log(this.loginForm.email, this.loginForm.password)
-            this.$store.dispatch('login', {
+        async login() {
+            try{
+                await this.$store.dispatch('login', {
             email: this.loginForm.email,
             password: this.loginForm.password
         })
+        this.errorMessage = "Successful! Logging you in."
+            }catch(err){
+                this.errorMessage = err.message
+            }
         },
         signup() {
             this.$store.dispatch('signup', {
@@ -260,4 +268,5 @@
     max-width: 500px
     margin-top: 100px
     padding: 50px
+.error
 </style>
