@@ -1,7 +1,7 @@
 # ChainVote
 
 Blockchain based Voting Platform build on Hyperledger Fabric v2. <br>
-Live at chainvote.bchainify.org
+Live at chainvote.co
 
 ## Project setup
 ```
